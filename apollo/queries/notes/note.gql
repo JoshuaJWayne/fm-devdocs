@@ -1,0 +1,15 @@
+query getNotes($slug: String) {
+	notes(where: { Slug: $slug }) {
+		id
+		title
+		Slug
+		content
+		author {
+	    	username
+		}
+		published_date
+		Featured_Img {
+	    	url
+		}
+	}
+}

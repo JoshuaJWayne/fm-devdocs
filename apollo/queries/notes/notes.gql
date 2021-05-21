@@ -1,0 +1,14 @@
+query getNotes {
+  notes {
+		title
+		Slug
+		content
+		author {
+			username
+		}
+		published_date
+		Featured_Img {
+			url
+		}
+	}
+}
