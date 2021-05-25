@@ -37,7 +37,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv', '@nuxtjs/apollo', '@nuxtjs/auth', '@nuxtjs/proxy'
+  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv', '@nuxtjs/apollo', '@nuxtjs/auth', '@nuxtjs/proxy', '@nuxtjs/markdownit', '@nuxtjs/strapi'
   ],
   axios: {
     baseURL: process.env.API_AUTH_URL,
@@ -54,6 +54,13 @@ export default {
     'https://api.firmmedia.org/uploads/*',
   ],
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
+  markdownit: {
+    preset: "default",
+    linkify: true,
+    breaks: true,
+    injected: true,
+    html: true,
+  },
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -71,7 +78,6 @@ export default {
       }
     }
   },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

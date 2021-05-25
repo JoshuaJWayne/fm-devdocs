@@ -2,35 +2,36 @@
 	<v-container>
 		<!-- full list of notes -->
 		<v-row justify="center" class="mt-10">
-			<v-col :col="10">
+			<v-col cols="12">
 				<h1>Notes Archive</h1>
-				<v-card-title>
-					Notes
-					<v-spacer></v-spacer>
-					<v-text-field
-					v-model="search"
-					append-icon="mdi-magnify"
-					label="Search"
-					single-line
-					hide-details
-				    ></v-text-field>
-				</v-card-title>
-				<v-data-table
-				 :headers="headers"
-				 :items="notes"
-				 :items-per-page="10"
-				 :search="search"
-				 class="elevation-1 text-left"
-			   >
-				 <template v-slot:item.Slug="{ item }">
-					 <a :href="`/notes/${item.Slug}`">Read More</a>
-				 </template>
-			   </v-data-table>	
-			   <pre>
-				   {{notes}}
-			   </pre>
-			</v-col>	
+			</v-col>
 		</v-row>
+		<template v-for="note in notes">
+			<v-row 
+			justify="center"
+			align="center" 
+			class="mt-6 mb-6">
+				<v-col cols="auto">		
+					<h2>{{note.title}}</h2>
+				</v-col>
+				<v-spacer></v-spacer>
+				
+				<v-btn
+				color="primary"
+				:href="`/notes/${note.Slug}`"
+				>
+				Read More
+				<v-icon
+				  dark
+				  right
+				>
+				  mdi-arrow-right
+				</v-icon>
+				</v-btn>
+				
+			</v-row>
+			<v-divider></v-divider>
+		</template>
 	</v-container>
 </template>
 
