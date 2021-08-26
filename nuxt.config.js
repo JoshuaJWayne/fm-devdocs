@@ -4,8 +4,8 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - app',
-    title: 'app',
+    titleTemplate: '%s - FM-Wiki',
+    title: 'FM-Wiki ',
     htmlAttrs: {
       lang: 'en'
     },
@@ -15,7 +15,7 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/fm_logo-400x400.png' }
     ]
   },
 
@@ -37,7 +37,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv', '@nuxtjs/apollo', '@nuxtjs/auth', '@nuxtjs/proxy'
+  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv', '@nuxtjs/apollo', '@nuxtjs/auth', '@nuxtjs/proxy', '@nuxtjs/markdownit', '@nuxtjs/strapi'
   ],
   axios: {
     baseURL: process.env.API_AUTH_URL,
@@ -49,20 +49,52 @@ export default {
       },
     },
   },
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: false,
+      home: '/notes',
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/auth/local',
+            method: 'post',
+            propertyName: 'jwt',
+          },
+          logout: false,
+          user: false,
+        },
+        tokenRequired: true,
+        tokenType: 'bearer',
+        globalToken: true,
+        autoFetchUser: false,
+      },
+    },
+  },
   proxy: [
     // Proxies /api/books/*/**.json to http://example.com:8000
     'https://api.firmmedia.org/uploads/*',
   ],
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
+  markdownit: {
+    preset: "default",
+    linkify: true,
+    breaks: true,
+    injected: true,
+    html: true,
+  },
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
+          primary: colors.lightBlue,
           accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          secondary: '#CC4028',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
@@ -71,7 +103,6 @@ export default {
       }
     }
   },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

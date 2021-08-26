@@ -3,6 +3,7 @@ query getNotes {
 		title
 		Slug
 		content
+		excerpt
 		author {
 			username
 		}

@@ -1,74 +1,35 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
-        <!-- <logo /> -->
-        <vuetify-logo />
+      <div class="text-center my-5">
+        <FMLogo />
       </div>
       <v-card>
         <v-card-title class="headline">
-          Let's Build with a Vuetify + Nuxt.js template
+          Welcome to The Firm Media Wiki
         </v-card-title>
         <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
+          <p>This site is a place for our team to gather documentation that is helpful in dealing with any Technical information related both Internal Tools and External Tools we utilize in managing our Clients' digital assets.</p>
+          <p>I Hope this tool is helpful. Please give me feedback so that we can add any information that may be helpful to you or your departments. With a little work this could be great!</p>
+          <site class="text-right">- Joshua James</site>
           <hr class="my-3">
           <a
-            href="https://nuxtjs.org/"
+            href="https://docs.google.com/spreadsheets/d/1QIZhuijn2X8E6P-uGzu06AZJ1lHcnY3kNGU3G9TLCIk/edit?pli=1#gid=0"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Nuxt Documentation
+            Super Board
           </a>
           <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="pb-5 px-4">
           <v-spacer />
           <v-btn
             color="primary"
             nuxt
-            to="/inspire"
+            to="/notes"
           >
-            Continue
+            Get Started →
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -77,13 +38,11 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import FmLogo from '~/components/FMLogo.vue'
 
 export default {
   components: {
-    Logo,
-    VuetifyLogo
+    FmLogo
   }
 }
 </script>

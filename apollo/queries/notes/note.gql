@@ -11,5 +11,19 @@ query getNotes($slug: String) {
 		Featured_Img {
 	    	url
 		}
+		note_tr {
+			rowTitle
+			perfromanceScore
+			accessibility
+			bestPractices
+			seo
+			mobileScore
+			desktopScore
+			client_category {
+				name
+			}
+		    hostingOnly
+		}
+		Public
 	}
 }

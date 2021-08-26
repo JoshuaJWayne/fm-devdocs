@@ -1,16 +1,16 @@
 <template>
   <img
-    class="VuetifyLogo"
-    alt="Vuetify Logo"
-    src="/vuetify-logo.svg"
+    class="FMLogo"
+    alt="Firm Media Logo"
+    src="/fm_logo_v2.svg"
   >
 </template>
 
 <style>
-.VuetifyLogo {
+.FMLogo {
   height: 180px;
   width: 180px;
-  transform: rotateY(560deg);
+  transform: rotateY(720deg);
   animation: turn 3.5s ease-out forwards 1s;
 }
 
