@@ -13,23 +13,30 @@
           <p>I Hope this tool is helpful. Please give me feedback so that we can add any information that may be helpful to you or your departments. With a little work this could be great!</p>
           <site class="text-right">- Joshua James</site>
           <hr class="my-3">
-          <a
-            href="https://docs.google.com/spreadsheets/d/1QIZhuijn2X8E6P-uGzu06AZJ1lHcnY3kNGU3G9TLCIk/edit?pli=1#gid=0"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Super Board
-          </a>
-          <br>
+          <ul>
+            <li>
+              <a
+              href="https://docs.google.com/spreadsheets/d/1QIZhuijn2X8E6P-uGzu06AZJ1lHcnY3kNGU3G9TLCIk/edit?pli=1#gid=0"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Super Board
+              </a>
+            </li>
+            <li>
+              <a href ="https://docs.google.com/spreadsheets/d/1WEl3crbo7vuH_PYcRhGwq8bKW2qYOhqE8e6dWz2qSTg/edit#gid=0" target="_blank" rel="noopener noreferrer">Site List Doc</a>
+            </li>
+          </ul>
         </v-card-text>
-        <v-card-actions class="pb-5 px-4">
-          <v-spacer />
+        <v-card-actions class="pb-5 d-flex justify-center">
           <v-btn
-            color="primary"
+            class="px-3"
+            color="secondary"
+            elevation="2"
+            x-large
             nuxt
             to="/notes"
           >
-            Get Started →
+            DashBoard →
           </v-btn>
         </v-card-actions>
       </v-card>

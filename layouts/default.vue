@@ -1,17 +1,17 @@
 <template>
-  <v-app >
+  <v-app>
     <v-navigation-drawer 
       v-model="drawer"
       :mobile-breakpoint=0
       :mini-variant="miniVariant"
-      :clipped="!clipped"
+      :clipped="clipped"
       fixed
       app
     >
      
     <v-list dense>
     <template>
-        <div v-for="item in items" :key="item.title">
+         <div v-for="item in items" :key="item.title">
             <v-list-group v-if="item.items" v-model="item.active" no-action link>
                 <template v-slot:activator>
                     <v-list-item-action v-if="item.icon">
@@ -41,13 +41,9 @@
         </div>
     </template>
     </v-list>
-     
-     
-     
-      
     </v-navigation-drawer>
     <v-app-bar
-      :clipped-left="!clipped"
+      :clipped-left="clipped"
       fixed
       app
     >
@@ -58,18 +54,20 @@
       </nuxt-link>
       <!-- <v-toolbar-title v-else v-text="title"/> -->
       <v-spacer />
-      <v-switch class="mt-6 mr-4" :label="`Light Theme`" @click="$vuetify.theme.dark=!$vuetify.theme.dark"></v-switch>
-      
-      <div class="buttons" v-if="$auth.loggedIn">
+        <template>
+           <v-switch v-model="darkmode" color="primary" class="mt-6 mr-2"/>
+             <div class="toggle-links" :class="[darkmode ? 'darkActive' : 'lightActive']"><span class='darkTitleTag'>Dark</span>/<span class="lightTitleTag mr-4">Light</span></div>
+        </template>
+        <div class="buttons" v-if="$auth.loggedIn">
         <!-- {{$auth.user.email }} -->
-        <button class="v-btn v-btn--is-elevated v-btn--has-bg theme--dark v-size--default secondary" @click="logout()">
+        <button class="v-btn v-btn--is-elevated v-btn--has-bg v-size--default secondary" @click="logout()">
             Log Out  
             <v-icon>mdi-logout</v-icon>
         </button>
       </div>
       <div class="buttons" v-else>
         <a 
-        <nuxt-link  class="v-btn v-btn--is-elevated v-btn--has-bg theme--dark v-size--default info" to="/login">
+        <nuxt-link  class="v-btn v-btn--is-elevated v-btn--has-bg v-size--default info" to="/login">
           Log in  <v-icon>mdi-login</v-icon>
         </nuxt-link>
       </div>
@@ -78,12 +76,6 @@
     </v-app-bar>
     <v-main>
       <v-container>
-        <template v-if="goLight">
-        <p>Light Mode !</p>
-        </template>
-        <template v-else>
-          <p>Dark Mode</p>
-        </template>
         <nuxt />
       </v-container>
     </v-main>
@@ -101,9 +93,9 @@
 export default {
   data () {
     return {
-      isLight: false,
-      clipped: false,
-      drawer: true,
+      darkmode: true,
+      clipped: true,
+      drawer: false,
       fixed: true,
       items: [
         {
@@ -200,6 +192,16 @@ export default {
           ]
         },
         {
+          icon: 'mdi-card-search-outline',
+          title: 'SEO Documentation',
+          items: [
+            {
+              title: 'Processes',
+              to: '/notes/seo-processes',
+            },                       
+          ]
+        },        
+        {
           icon: 'mdi-file-document',
           title: 'Industry Resouces',
           to: '/notes/industry-resources',
@@ -217,6 +219,20 @@ export default {
               to: '/notes/social-media-resources',
             }            
           ],
+        },
+        {
+          icon: 'mdi-laptop',
+          title: 'IT Documentation',
+          items: [
+            {
+              title: 'Processes',
+              to: '/notes'
+            },
+            {
+              title: 'Inventory',
+              to: '/devices' 
+            }
+          ]
         }            
       ],
       miniVariant: false,
@@ -225,29 +241,48 @@ export default {
       title: 'FM-Wiki'
     }
   },
+  watch: {
+    darkmode (oldval, newval) {
+      this.handledarkmode()
+    }
+  },
   methods: {
     async logout() {
       console.log('logout button clicked');
-      await this.$apolloHelpers.onLogout();
-      await this.$auth.logout();
-      this.$router.push('/login')
+        await this.$apolloHelpers.onLogout();
+        await this.$auth.logout();
+     this.$router.push('/login')
     },
-    toggleTheme() {
-       this.$vuetify.theme.dark=!this.$vuetify.theme.dark;
-       localStorage.setItem("useDarkTheme", this.$vuetify.theme.dark.toString())
+    handledarkmode () {
+      if (process.browser) {
+        if (this.darkmode === true) {
+          this.$vuetify.theme.dark = true
+          localStorage.setItem('DarkMode', true)
+        } else if (this.darkmode === false) {
+          this.$vuetify.theme.dark = false
+          localStorage.setItem('DarkMode', false)
+        }
+      }
     }
   },
-  mounted() {
-    const theme = localStorage.getItem("useDarkTheme");
-      if (theme) {
-        if (theme == "true") {
-          this.$vuetify.theme.dark = false;
-        } else this.$vuetify.theme.dark = true;
+  created () {
+    if (process.browser) {
+      console.log('started with session darkmode ' + localStorage.getItem('DarkMode'))
+      if (localStorage.getItem('DarkMode')) {
+        const cookieValue = localStorage.getItem('DarkMode') === 'true'
+        this.darkmode = cookieValue
+        this.handledarkmode()
+      } else {
+        this.handledarkmode()
       }
-  }
+    }
+  },
 }
 </script>
-<style>
+<style lang="scss">
+  pre code {
+    white-space: break-spaces;
+  }
   a.scrolltoo {
     padding-top: 80px;
   }
@@ -268,8 +303,28 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     border-radius: 0 4px 4px 0;
   }
+  .toggle-links {
+    &.lightActive {
+      span.lightTitleTag {
+        font-weight: 500;
+        color: #03a9f4;
+      }
+      span.darkTitleTag {
+        font-weight: 400;
+      }
+    }
+    &.darkActive {
+      span.lightTitleTag {
+        font-weight: 400;  
+      }
+      span.darkTitleTag {
+        font-weight: 500;
+        color: #03a9f4;
+      }
+    }
+  }
 </style>
-<style scoped>
+<style>
   .disabled-link {
     color: currentColor;
     cursor: not-allowed;
@@ -283,5 +338,11 @@ export default {
   .theme--dark .home-link {
     text-decoration: none;
     color: white;
+  }
+  .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, .03);
+  }
+  .theme--dark.v-data-table > .v-data-table__wrapper > table > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(93, 93, 93, .25);
   }
 </style>

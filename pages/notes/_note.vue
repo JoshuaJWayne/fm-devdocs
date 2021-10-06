@@ -91,7 +91,8 @@
 				<v-btn
 				color="primary"
 				class="mb-10"
-				href="/notes"
+				x-large
+				:to="`/notes`"
 				>
 					<v-icon
 					  dark
@@ -176,9 +177,12 @@
 		border-radius: 5px;
 		margin-bottom: 2rem;
 	}
+	pre code,
 	code {
 		background-color: transparent;
 		padding: 0.2em 0;
+		white-space: break-spaces;
+		word-break: break-word;
 	}
 	a {
 		word-break: break-all;
@@ -198,6 +202,15 @@
 	img {
 		max-width: 100%;
 		height: auto;
+	}
+}
+.theme--light.v-application #editor {
+	pre {
+		background-color: #2d2d2d;
+	}
+	.code-toolbar pre code,
+	.code-toolbar code {
+		background-color: #2d2d2d;
 	}
 }
 </style>

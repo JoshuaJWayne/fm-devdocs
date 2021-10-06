@@ -47,11 +47,11 @@
 				
 				<v-btn
 				color="primary"
-				:href="`/notes/${note.Slug}`"
+				large
+				:to="`/notes/${note.Slug}`"
 				>
 				Read More
 				<v-icon
-				  dark
 				  right
 				>
 				  mdi-arrow-right

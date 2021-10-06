@@ -1,0 +1,22 @@
+query getDevices {
+	devices {
+		id
+		Serial_Number
+		Model
+		memory {
+			value
+		}
+		storage
+		processor {
+			type
+		}
+		graphics
+		team_member {
+			username
+		}
+		OS
+		mac_user
+		icloudAccount
+		Notes
+	}	
+}
